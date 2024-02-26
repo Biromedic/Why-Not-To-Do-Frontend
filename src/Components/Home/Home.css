@@ -1,0 +1,38 @@
+/* src/HomePage.css */
+.homepage {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  input[type="text"] {
+    padding: 10px;
+    margin-right: 10px;
+    width: 70%;
+    font-size: 16px;
+  }
+  
+  button {
+    padding: 10px;
+    width: 20%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    text-align: left;
+    padding: 8px 0;
+  }
+  

@@ -1,8 +1,8 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import "../Components/navbar.css"
-import logo from '../Assets/logo.png'
+import "../NavbarFolder/navbar.css"
+import logo from '../../Assets/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,7 +10,7 @@ function NavbarTop() {
   return (
       <Navbar expand="lg">
       <Container>
-          <Navbar.Brand href="#" className='logo-section'>
+          <Navbar.Brand href="/home" className='logo-section'>
             <img
               src={logo}
               alt="Logo"
@@ -24,11 +24,12 @@ function NavbarTop() {
           </Navbar.Toggle>
           <Navbar.Collapse id="navbarScroll">
             <Nav className="ms-auto nav-links-section">
-              <Nav.Link href="#action1">Home</Nav.Link>
+              <Nav.Link href="/home">Home</Nav.Link>
               <Nav.Link href="#action2">About Me</Nav.Link>
               <Nav.Link href="#action3">Services</Nav.Link>
               <Nav.Link href="#action4">Contact</Nav.Link>
               <Nav.Link href="#action5">Portfolio</Nav.Link>
+              <Nav.Link href="/login">Log In</Nav.Link>
             </Nav>
           </Navbar.Collapse>
       </Container>
