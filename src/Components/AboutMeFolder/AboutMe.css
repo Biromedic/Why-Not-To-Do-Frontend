@@ -1,0 +1,93 @@
+:root {
+    --primary-white: #fff;
+    --primary-red: #86030e;
+    --primary-dark: rgba(255, 255, 255, 0);
+    --primary-orange: #FF8C00;
+}
+
+.about-me {
+    padding: 20px;
+    max-width: 600px;
+    margin: 40px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #1a1a1a, #333);
+    color: var(--primary-orange);
+}
+
+.about-me h1,
+.about-me h2 {
+    text-align: center;
+    color: var(--primary-orange);
+    margin-bottom: 20px;
+}
+
+.user-details {
+    margin-bottom: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.user-details p {
+    margin: 10px 0;
+    font-size: 18px;
+    color: var(--primary-white);
+}
+
+.username-change, .password-reset {
+    margin-top: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.username-change input,
+.password-reset input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #2a2a2a;
+    color: #fff;
+    font-size: 16px;
+}
+
+.username-change input::placeholder,
+.password-reset input::placeholder {
+    color: #96cdf1;
+}
+
+.username-change button,
+.password-reset button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #FF8C00;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.username-change button:hover,
+.password-reset button:hover {
+    background-color: #e67e22;
+}
+
+.message {
+    margin-top: 10px;
+    color: green;
+    text-align: center;
+    font-weight: bold;
+}
+
+.about-me p strong {
+    display: inline-block;
+    width: 100px;
+    color: var(--primary-orange);
+}
