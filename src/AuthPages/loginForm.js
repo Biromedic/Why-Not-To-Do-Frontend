@@ -13,15 +13,13 @@ function LoginForm({ onLogin }) {
         username,
         password
       });
-      console.log('Login response:', response);
-
-      if (response && response.data && response.data.token) {
+      if (response.data && response.data.token) {
         onLogin(response.data.token);
       } else {
-        throw new Error('Invalid login response');
+        console.error('Login response does not contain a token');
       }
     } catch (error) {
-      console.error('Login failed:', error.message || error);
+      console.error('Login failed:', error.response?.data || error.message || error);
       alert('Failed to login');
     }
   };

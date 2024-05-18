@@ -15,7 +15,7 @@ function NavbarTop() {
         localStorage.removeItem('authToken');
         setTimeout(() => {
             navigate('/login');
-          }, 1000);
+          }, 400);
     };
 
     return (

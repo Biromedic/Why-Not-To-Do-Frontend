@@ -2,7 +2,7 @@ import './App.css';
 import TaskForm from "./TaskForm";
 import Task from "./Task";
 import NavbarTop from "./Components/NavbarFolder/Navbar";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
 import LoginForm from "./AuthPages/loginForm";
 import AboutMe from './Components/AboutMeFolder/AboutMe';
@@ -12,7 +12,7 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState('');
-  const navigate = useNavigate(); // useNavigate kancasını burada kullanıyoruz
+  const navigate = useNavigate();
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
@@ -45,6 +45,7 @@ function App() {
     setIsLoggedIn(true);
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     fetchTasks();
+    navigate('/');
   };
 
   const handleLogout = () => {
@@ -52,10 +53,6 @@ function App() {
     setIsLoggedIn(false);
     navigate('/login');
   };
-
-  if (!isLoggedIn) {
-    return <LoginForm onLogin={handleLogin} />;
-  }
 
   const addTask = async (description) => {
     try {
