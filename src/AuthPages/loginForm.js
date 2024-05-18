@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './loginForm.css';
+import logo from '../Assets/logo.png';
 
 function LoginForm({ onLogin }) {
   const [username, setUsername] = useState('');
@@ -13,19 +14,18 @@ function LoginForm({ onLogin }) {
         username,
         password
       });
-      if (response.data && response.data.token) {
-        onLogin(response.data.token);
-      } else {
-        console.error('Login response does not contain a token');
-      }
+      onLogin(response.data.token);
     } catch (error) {
-      console.error('Login failed:', error.response?.data || error.message || error);
+      console.error('Login failed:', error.response.data);
       alert('Failed to login');
     }
   };
 
   return (
     <div className="login-container">
+      <div className="logo-container">
+        <img src={logo} alt="Logo" className="logo" />
+      </div>
       <form onSubmit={handleSubmit} className="form-box">
         <div>
           <label>Username:</label>
