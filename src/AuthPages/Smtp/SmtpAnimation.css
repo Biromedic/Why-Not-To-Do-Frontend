@@ -1,0 +1,38 @@
+.animation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1e1e1e;
+    color: white;
+  }
+  
+  .dvd-animation {
+    position: relative;
+    animation: bounce 5s infinite;
+  }
+  
+  .dvd-animation img {
+    width: 100px;
+    height: auto;
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      top: 0;
+      left: 0;
+    }
+    25% {
+      top: 0;
+      left: calc(100% - 100px);
+    }
+    50% {
+      top: calc(100% - 100px);
+      left: calc(100% - 100px);
+    }
+    75% {
+      top: calc(100% - 100px);
+      left: 0;
+    }
+  }
+  

@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './loginForm.css';
+import logo from '../Assets/logo.png';
 
 function LoginForm({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,6 +30,7 @@ function LoginForm({ onLogin }) {
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit} className="form-box">
+        <img src={logo} alt="Logo" className="logo" />
         <div>
           <label>Username:</label>
           <input
@@ -48,6 +52,10 @@ function LoginForm({ onLogin }) {
         </div>
         <button className='loginButton' type="submit">Log In</button>
       </form>
+      <div className="form-switch">
+        <span className="switchLink" onClick={() => navigate('/register')}>Register</span>
+        <span className="switchLink" onClick={() => navigate('/forgot-password')}>Forgot Password</span>
+      </div>
     </div>
   );
 }

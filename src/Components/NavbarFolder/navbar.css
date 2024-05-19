@@ -14,7 +14,7 @@ body{
 
 .navbar{
     min-height: 6.25rem;
-    background-color: rgb(111, 114, 111);
+    /*background-color: #ffffff;*/
 }
 
 .nav-link {
