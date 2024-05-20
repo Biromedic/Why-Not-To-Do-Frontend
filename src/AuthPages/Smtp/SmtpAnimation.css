@@ -1,38 +1,32 @@
 .animation-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #1e1e1e;
-    color: white;
-  }
-  
-  .dvd-animation {
-    position: relative;
-    animation: bounce 5s infinite;
-  }
-  
-  .dvd-animation img {
-    width: 100px;
-    height: auto;
-  }
-  
-  @keyframes bounce {
-    0%, 100% {
-      top: 0;
-      left: 0;
-    }
-    25% {
-      top: 0;
-      left: calc(100% - 100px);
-    }
-    50% {
-      top: calc(100% - 100px);
-      left: calc(100% - 100px);
-    }
-    75% {
-      top: calc(100% - 100px);
-      left: 0;
-    }
-  }
-  
+  position: relative;
+  height: 100vh;
+  background-color: #1e1e1e;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+.dvd-animation {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 0;
+  left: 0;
+  animation: moveX 5s linear infinite alternate, moveY 3.4s linear infinite alternate;
+}
+
+.dvd-animation img {
+  width: 100%;
+  height: auto;
+}
+
+@keyframes moveX {
+  from { left: 0; } 
+  to { left: calc(100vw - 100px); }
+}
+
+@keyframes moveY {
+  from { top: 0; } 
+  to { top: calc(100vh - 100px); }
+}

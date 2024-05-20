@@ -26,7 +26,6 @@ function ForgotPasswordForm({ onSwitchToLogin }) {
         </div>
         <button className='loginButton' type="submit">Send Reset Instructions</button>
       </form>
-      <button className="switchButton" onClick={onSwitchToLogin}>Back to Login</button>
     </div>
   );
 }

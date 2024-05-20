@@ -9,19 +9,18 @@ function SmtpAnimation() {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate('/login');
-    }, 60000);
+    }, 600000);
 
     return () => clearTimeout(timer); 
   }, [navigate]);
 
   return (
-    <div className="smtp-animation-container">
+    <div className="animation-container">
       <h1>Working on SMTP...</h1>
-      <div className="dvd-logo">
+      <div className="dvd-animation">
         <img src={dvdLogo} alt="DVD Logo" />
       </div>
     </div>
   );
 }
-
 export default SmtpAnimation;
