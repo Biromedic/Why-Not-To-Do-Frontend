@@ -7,16 +7,18 @@ import axios from 'axios';
 import LoginForm from "./AuthPages/loginForm";
 import AboutMe from './Components/AboutMeFolder/AboutMe';
 import AdminDashboard from './Components/Admin/AdminDashboard';
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import AdminRoute from './Components/Admin/AdminRoute';
 import ForgotPasswordForm from './AuthPages/ForgotPasswordForm';
 import SmtpAnimation from './AuthPages/Smtp/SmtpAnimation';
 import RegisterForm from './AuthPages/RegisterForm';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('authToken'));
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
@@ -25,7 +27,7 @@ function App() {
       axios.get('http://localhost:8080/api/user/me')
         .then(response => {
           if (response.data) {
-            localStorage.setItem("userRole", response.data.role);
+            localStorage.setItem("userRole",response.data.role);
             setIsLoggedIn(true);
             fetchTasks();
           } else {
@@ -38,9 +40,6 @@ function App() {
           setIsLoggedIn(false);
           navigate('/login');
         });
-    } else {
-      setIsLoggedIn(false);
-      navigate('/login');
     }
   }, [navigate]);
 
@@ -65,7 +64,7 @@ function App() {
     axios.get('http://localhost:8080/api/user/me')
       .then(response => {
         if (response.data) {
-          localStorage.setItem('userRole', response.data.role);
+          localStorage.setItem('userRole', response.data.role); 
           fetchTasks();
           navigate('/');
         } else {
@@ -168,38 +167,42 @@ function App() {
   }
 
   return (
-    <Routes>
-      <Route path="/" element={
-        isLoggedIn ? (
-          <div>
-            <NavbarTop handleLogout={handleLogout} />
-            <main>
-              <h1>{numberComplete}/{numberTotal} Complete</h1>
-              <h2>{getMessage()}</h2>
-              <TaskForm onAdd={addTask} />
-              {tasks.length > 0 ? tasks.map((task, index) => (
-                <Task key={task.id}
-                      id={task.id}
-                      description={task.description}
-                      complete={task.complete}
-                      onRename={newName => renameTask(index, newName)}
-                      onTrash={() => removeTask(index)}
-                      onToggle={done => updateTaskDone(index, done)} />
-              )) : <p>No tasks available</p>}
-            </main>
-          </div>
-        ) : (
-          <Navigate to="/login" />
-        )
-      } />
-      <Route path="/about" element={<AboutMe />} />
-      <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
-      <Route path="/forgot-password" element={<ForgotPasswordForm />} />
-      <Route path="/admin-dashboard" element={<AdminRoute element={<AdminDashboard />} />} />
-      <Route path="/register" element={<RegisterForm />} />
-      <Route path="/smtp-animation" element={<SmtpAnimation />} />
-      <Route path="*" element={isLoggedIn ? <Navigate to="/" /> : <Navigate to="/login" />} />
-    </Routes>
+    <TransitionGroup>
+      <CSSTransition key={location.key} classNames="fade" timeout={300}>
+        <Routes location={location}>
+          <Route path="/" element={
+            isLoggedIn ? (
+              <div>
+                <NavbarTop handleLogout={handleLogout} />
+                <main>
+                  <h1>{numberComplete}/{numberTotal} Complete</h1>
+                  <h2>{getMessage()}</h2>
+                  <TaskForm onAdd={addTask} />
+                  {tasks.length > 0 ? tasks.map((task, index) => (
+                    <Task key={task.id}
+                          id={task.id}
+                          description={task.description}
+                          complete={task.complete}
+                          onRename={newName => renameTask(index, newName)}
+                          onTrash={() => removeTask(index)}
+                          onToggle={done => updateTaskDone(index, done)} />
+                  )) : <p>No tasks available</p>}
+                </main>
+              </div>
+            ) : (
+              <Navigate to="/login" />
+            )
+          } />
+          <Route path="/about" element={<AboutMe />} />
+          <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
+          <Route path="/forgot-password" element={<ForgotPasswordForm />} />
+          <Route path="/admin-dashboard" element={<AdminRoute element={<AdminDashboard />} />} />
+          <Route path="/register" element={<RegisterForm />} />
+          <Route path="/smtp-animation" element={<SmtpAnimation />} />
+          <Route path="*" element={isLoggedIn ? <Navigate to="/" /> : <Navigate to="/login" />} />
+        </Routes>
+      </CSSTransition>
+    </TransitionGroup>
   );
 }
 
