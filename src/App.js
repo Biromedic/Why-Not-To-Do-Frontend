@@ -17,6 +17,8 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 function App() {
   const [tasks, setTasks] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('authToken'));
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const [sortBy, setSortBy] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -53,6 +55,34 @@ function App() {
       }
     } catch (error) {
       console.error('Failed to fetch tasks:', error.message || error);
+      setTasks([]);
+    }
+  };
+
+  const searchTasks = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/tasks/search?keyword=${searchKeyword}`);
+      if (response.data) {
+        setTasks(response.data);
+      } else {
+        setTasks([]);
+      }
+    } catch (error) {
+      console.error('Failed to search tasks:', error.message || error);
+      setTasks([]);
+    }
+  };
+
+  const sortTasks = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/tasks/sort?sortBy=${sortBy}`);
+      if (response.data) {
+        setTasks(response.data);
+      } else {
+        setTasks([]);
+      }
+    } catch (error) {
+      console.error('Failed to sort tasks:', error.message || error);
       setTasks([]);
     }
   };
@@ -177,6 +207,22 @@ function App() {
                 <main>
                   <h1>{numberComplete}/{numberTotal} Complete</h1>
                   <h2>{getMessage()}</h2>
+                  <div className="search-sort">
+                    <input 
+                      type="text" 
+                      placeholder="Search tasks" 
+                      value={searchKeyword} 
+                      onChange={e => setSearchKeyword(e.target.value)} 
+                    />
+                    <button onClick={searchTasks}>Search</button>
+                    <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
+                      <option value="">Sort By</option>
+                      <option value="description">Description</option>
+                      <option value="complete">Complete</option>
+                      {/* Diğer sıralama seçenekleri */}
+                    </select>
+                    <button onClick={sortTasks}>Sort</button>
+                  </div>
                   <TaskForm onAdd={addTask} />
                   {tasks.length > 0 ? tasks.map((task, index) => (
                     <Task key={task.id}
